@@ -2,11 +2,80 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Judul Halaman Kamu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download E-Book Gratis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 0 20px;
+      text-align: center;
+    }
+    h1 { margin-bottom: 30px; }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      text-align: left;
+      font-weight: bold;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 12px;
+      font-size: 18px;
+      border: none;
+      border-radius: 4px;
+      background: #25D366;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { opacity: 0.9; }
+  </style>
 </head>
 <body>
-  <h1>Halo, ini Halaman Utama (index.html)</h1>
-  <p>Selamat datang di e-book landing page sederhana.</p>
+  <h1>Download E-Book Gratis</h1>
+  <form id="ebook-form">
+    <div>
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="wa">No. WhatsApp</label>
+      <input type="tel" id="wa" name="wa" placeholder="081234567890" required>
+    </div>
+    <button type="submit">Dapatkan E-Book</button>
+  </form>
+
+  <script>
+    document.getElementById('ebook-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Ambil value
+      const username = document.getElementById('username').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      let wa         = document.getElementById('wa').value.trim();
+      // Ubah leading 0 ke kode negara (62 untuk Indonesia)
+      if (wa.startsWith('0')) wa = '62' + wa.slice(1);
+      // Ganti dengan nomor WA kamu (tanpa +)
+      const myWA = '6281234567890';
+      // Buat pesan yang di-encode
+      const text = encodeURIComponent(
+        `Halo, saya ${username}\nEmail: ${email}\nNo WA: ${wa}\nMau e-book, ya!`
+      );
+      // Buka WhatsApp chat di tab baru
+      window.open(`https://wa.me/${myWA}?text=${text}`, '_blank');
+    });
+  </script>
 </body>
 </html>
