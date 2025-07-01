@@ -2,79 +2,118 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download E-Book Gratis</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Landing Page & E-Book Asuransi</title>
   <style>
+    /* Reset singkat */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 0 20px;
+      font-family: 'Arial', sans-serif;
+      background: #E44C2E;
+      color: #FFF;
       text-align: center;
+      padding: 20px;
+      line-height: 1.4;
     }
-    h1 { margin-bottom: 30px; }
+    .container {
+      max-width: 480px;
+      margin: auto;
+      background: #F25F3A;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+    h2 {
+      font-size: 1rem;
+      font-weight: normal;
+      opacity: 0.9;
+      margin-bottom: 16px;
+    }
+    .illustration {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      /* Ganti src-nya dengan URL ilustrasi yang kamu suka */
+    }
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+      text-align: left;
     }
     label {
-      text-align: left;
-      font-weight: bold;
+      display: block;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      opacity: 0.95;
     }
     input {
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
     }
     button {
-      padding: 12px;
-      font-size: 18px;
-      border: none;
-      border-radius: 4px;
+      width: 100%;
+      padding: 14px;
+      font-size: 1.1rem;
       background: #25D366;
-      color: white;
+      color: #FFF;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
+      transition: opacity 0.2s;
     }
-    button:hover { opacity: 0.9; }
+    button:hover {
+      opacity: 0.9;
+    }
+    .footer {
+      font-size: 0.8rem;
+      margin-top: 14px;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
-  <h1>Download E-Book Gratis</h1>
-  <form id="ebook-form">
-    <div>
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
-    </div>
-    <div>
+  <div class="container">
+    <h1>Landing Page & E-Book Asuransi</h1>
+    <h2>Materi Pemahaman Bisnis Asuransi</h2>
+    <!-- Ganti src berikut dengan ilustrasi keluarga atau copy-paste base64 -->
+    <img class="illustration" src="https://i.imgur.com/3M8QbPe.png" alt="Ilustrasi Keluarga">
+    
+    <form id="form">
+      <label for="username">Nama Lengkap</label>
+      <input type="text" id="username" name="username" placeholder="Tulis nama kamu" required>
+      
       <label for="email">Email</label>
-      <input type="email" id="email" name="email" required>
-    </div>
-    <div>
+      <input type="email" id="email" name="email" placeholder="contoh@domain.com" required>
+      
       <label for="wa">No. WhatsApp</label>
       <input type="tel" id="wa" name="wa" placeholder="081234567890" required>
+      
+      <button type="submit">Dapatkan E-Book</button>
+    </form>
+    
+    <div class="footer">
+      Isi data di atas, dan kamu akan langsung diarahkan ke WA untuk mendapatkan e-book.
     </div>
-    <button type="submit">Dapatkan E-Book</button>
-  </form>
+  </div>
 
   <script>
-    document.getElementById('ebook-form').addEventListener('submit', function(e) {
+    document.getElementById('form').addEventListener('submit', function(e) {
       e.preventDefault();
-      // Ambil value
-      const username = document.getElementById('username').value.trim();
-      const email    = document.getElementById('email').value.trim();
-      let wa         = document.getElementById('wa').value.trim();
-      // Ubah leading 0 ke kode negara (62 untuk Indonesia)
+      let name  = encodeURIComponent(this.username.value.trim());
+      let email = encodeURIComponent(this.email.value.trim());
+      let wa    = this.wa.value.trim();
+      // Ubah leading 0 ke kode negara Indonesia (62)
       if (wa.startsWith('0')) wa = '62' + wa.slice(1);
-      // Ganti dengan nomor WA kamu (tanpa +)
-      const myWA = '6281234567890';
-      // Buat pesan yang di-encode
-      const text = encodeURIComponent(
-        `Halo, saya ${username}\nEmail: ${email}\nNo WA: ${wa}\nMau e-book, ya!`
-      );
-      // Buka WhatsApp chat di tab baru
-      window.open(`https://wa.me/${myWA}?text=${text}`, '_blank');
+      const targetWA = '6281282695611';
+      const text = `Halo,%20saya%20${name}%0AEmail:%20${email}%0ANoWA:%20${wa}%0AMohon%20kirim%20link%20e-book.`;
+      window.open(`https://wa.me/${targetWA}?text=${text}`, '_blank');
     });
   </script>
 </body>
